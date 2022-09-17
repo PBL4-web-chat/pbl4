@@ -1,0 +1,47 @@
+.side-bar{
+    position: absolute;
+    left: 90px;
+    width: 300px;
+    top: 3%;
+    height: 94%;
+    margin-right: 0px;
+    background-color: #464852;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 5px;
+}
+
+.side-bar p{
+    text-align: center;
+}
+
+.side-bar-li{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #5a5c66;
+}
+
+.side-bar-li:last-child{
+    border: none;
+}
+
+.li-img{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 5px;
+    border-radius: 20px;
+}
+
+.li-name{
+    left: 45px;
+    margin-left: 10px;
+    position: absolute;
+    color: white;
+}
+
+.side-bar-li:hover{
+    opacity: 80%;
+    background-color: #5a5c66;
+}
