@@ -1,6 +1,6 @@
 function Message(props){
     return (
-        <div>
+        <div className={props.class}>
             {props.txt}
         </div>
     );

@@ -1,0 +1,41 @@
+.message-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 0;
+    width: 100%;
+    height: calc(98% - 170px);
+    overflow-y: auto;
+}
+
+.msg{
+    background-color: #464852;
+    width: fit-content;
+    padding: 7px 16px 7px;
+    margin-bottom: 5px;
+    border-radius: 7px;
+}
+
+.out-going{
+    background-color: green;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

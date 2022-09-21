@@ -10,6 +10,7 @@
     position: relative;
     font-size: 150%;
     margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .profile-img{
@@ -24,15 +25,6 @@
     top: 50%;
     left: 70px;
     transform: translateY(-50%);
-}
-
-.message{
-    position: relative;
-    display: flex;
-    z-index: 0;
-    width: 100%;
-    height: calc(98% - 170px);
-    overflow-y: auto;
 }
 
 .main-content form{
@@ -80,10 +72,10 @@ form .msg-content{
 hr{
     border: 0.5px solid gray;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 0px;
 }
 
 @media only screen and (max-width: 768px){
-    .main-content{width: calc(100% - 105px);}
+    .main-content{width: calc(100% - 115px);}
 }
