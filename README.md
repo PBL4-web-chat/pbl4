@@ -7,3 +7,22 @@ model trong ./server/models -> mô hình hóa database
 
 >mn dùng phần mềm Postman để thử nghiệm request/response của API.
 > > **Cần tải mongodb (bản compass hoặc dùng trên cloud cluster đều đc)**, nếu dùng cluster thì đổi url đến db trong file index.js (server)
+
+>guide: 
+
+-tại terminal ./pbl4 gõ 
+
+cd client       //chuyển tới client
+
+npm install     //import các module cần thiết, sau này ko cần import lại
+
+npm start       //khởi động client
+
+
+-tại terminal ./pbl4 gõ
+
+cd server       //chuyển tới server
+
+npm install
+
+node .          //khởi động server
