@@ -1,26 +1,86 @@
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { useEffect } from "react";
 
-function Login(){
+function Login() {
+
+    useEffect(() => {
+        if(localStorage['accessToken']) nav('/mainpage');
+    }, [])
+
+    const { loginUser } = useContext(AuthContext);
+    const [ loginStatus, setLoginStatus ] = useState( { 
+        display: false,
+        message: ""
+    } )
+
+    const [loginForm, setLoginForm] = useState({
+        username: '',
+        password: ''
+    })
+
+    const nav = useNavigate();
+
+    const onChangeContext = (event) => {
+        setLoginForm({ ...loginForm, [event.target.name]: event.target.value })
+    }
+
+    const login = async (event) => {
+        event.preventDefault();
+
+        try {
+            const loginData = await loginUser(loginForm);
+            console.log(loginData);
+            if(loginData.success){
+                nav('/mainpage');
+            }
+            else{
+                setLoginStatus( { 
+                    display: true,
+                    message: loginData.message
+                } )
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
-        <div id="login">
-            <form name="login">
-                <table>
-                    <caption>Đăng nhập</caption>
-                    <tr>
-                        <td>username:</td>
-                        <td>
-                            <input type="text" name="uname" autoComplete="off"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>password:</td>
-                        <td>
-                            <input type="password" name="pwd" autoComplete="off"/>
-                        </td>
-                    </tr>
-                </table>
-                <Link to={`mainpage`}><input type="button" value="login" /></Link>
-            </form>
+        <div className="landing">
+            <div className="dark-overlay">
+                <div className="landing-inner">
+                    <h1>Login</h1> 
+                    <Form className="my-2" name="login" onSubmit={login}>
+                        <Form.Group className="my-1">
+                            <Form.Control
+                                type="text"
+                                placeholder="username"
+                                name="username"
+                                required
+                                autoComplete="off"
+                                onChange={onChangeContext}
+                            />
+                        </Form.Group>
+                        <Form.Group className="my-1">
+                            <Form.Control
+                                type="password"
+                                placeholder="password"
+                                name="password"
+                                required
+                                autoComplete="off"
+                                onChange={onChangeContext}
+                            />
+                        </Form.Group>
+                        <Button variant="success" type="submit" className="mt-1">Login</Button>
+                    </Form>
+                    {loginStatus.display && <div style={{color: "red"}}>{loginStatus.message}</div>}
+                </div>
+                
+            </div>
         </div>
     );
 }

@@ -1,4 +1,10 @@
-function ContentHeader(){
+import { useEffect } from "react";
+
+function ContentHeader( props ){
+
+    useEffect(() => {
+    }, [props.conversation_id])
+
     return (
         <div className="content-header">
             <img src="asset/logo.png" alt="group" className="profile-img"/>
