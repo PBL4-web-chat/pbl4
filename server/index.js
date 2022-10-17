@@ -5,6 +5,9 @@ const { default: mongoose } = require("mongoose");
 var url = "mongodb://localhost:27017/dbChat";
 
 const authRouter = require('./routes/auth');
+const msgRouter = require('./routes/msg');
+const convRouter = require('./routes/conversation');
+const memberRouter = require('./routes/member');
 
 const PORT = 8080;
 
@@ -30,31 +33,9 @@ app.use(cors({
 }))
 
 app.use('/api/auth', authRouter);
-
-// app.get("/msg", (req, res) => {
-//     getMsg("aza")
-//         .then(data => {
-//             res.status(200).send(data)
-//         })
-//         .catch(err => console.log(err))
-// })
-
-// app.post("/msg/:username", (req, res) => {
-//     const { username } = req.params;
-//     const { conversation_id } = req.body;
-//     const { send_time } = req.body;
-//     const { text } = req.body;
-
-//     if(!text || !conversation_id || !send_time) {
-//         res.status(418).send({ message: "bad request" });
-//     } else {
-//         addMsg(text, username, conversation_id, send_time);
-//         console.log(`${text} ${conversation_id} ${send_time} ${text}`)
-//         res.send({
-//             msg: `${text} of sender ${username} at ${send_time} to id ${conversation_id}`,
-//         })
-//     }
-// })
+app.use('/api/msg', msgRouter);
+app.use('/api/conversation', convRouter);
+app.use('/api/member', memberRouter);
 
 app.listen(
     PORT,

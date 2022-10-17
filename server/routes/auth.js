@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const json = express.json;
 const User = require('../models/User');
 const argon2 = require('argon2');
 
@@ -34,7 +33,7 @@ router.post('/register', async(req, res) => {
     }
 })
 
-router.get('/login', async(req, res) => {
+router.post('/login', async(req, res) => {
     const { username, password } = req.body;
 
     if(!username || !password)
@@ -51,7 +50,7 @@ router.get('/login', async(req, res) => {
                 .json({ success: false, message: "user not existed" });
 
         if(await argon2.verify(user.password, password))
-            return res.status(200).json({ success: true, message: "authenticated" });
+            return res.status(200).json({ success: true, message: "authenticated", access_token: user._id});
         else
             return res.status(400).json({ success: false, message: "incorrect password" });
     } catch(err) {
