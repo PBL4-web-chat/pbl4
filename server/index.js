@@ -2,21 +2,21 @@ const express = require("express");
 const cors = require('cors');
 const { default: mongoose } = require("mongoose");
 
-var url = "mongodb://localhost:27017/dbChat";
+var url = "mongodb+srv://pbl4:pbl4@dbchat.nsy4uyf.mongodb.net/test";
 
 const authRouter = require('./routes/auth');
 const msgRouter = require('./routes/msg');
 const convRouter = require('./routes/conversation');
 const memberRouter = require('./routes/member');
+const userRouter = require('./routes/user');
 
 const PORT = 8080;
 
-const connectDB = async () => {
+const connectDB = async() => {
     try {
         await mongoose.connect(url);
         console.log("DB connected");
-    }
-    catch(err){
+    } catch(err) {
         console.log(err);
         process.exit(1);
     }
@@ -36,6 +36,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/msg', msgRouter);
 app.use('/api/conversation', convRouter);
 app.use('/api/member', memberRouter);
+app.use('/api/user', userRouter);
 
 app.listen(
     PORT,

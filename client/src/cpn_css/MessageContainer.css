@@ -13,7 +13,6 @@
     width: fit-content;
     max-width: 80%;
     padding: 7px 16px 7px;
-    margin-bottom: 5px;
     border-radius: 7px;
     word-wrap: break-word;
 }
@@ -21,6 +20,13 @@
 .out-going{
     background-color: green;
     margin-left: auto;
+}
+
+.dt{
+    background: none;
+    margin-bottom: 5px;
+    font-size: 75%;
+    opacity: 80%;
 }
 
 /* width */

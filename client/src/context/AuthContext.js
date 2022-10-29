@@ -16,6 +16,7 @@ const AuthContextProvider = ({ children }) => {
             const res = await axios.post('http://localhost:8080/api/auth/login', loginForm);
             if(res.data.success){
                 localStorage.setItem('accessToken', res.data.access_token);
+                dispatch( { type: "LOGIN", user_id: res.data.access_token } );
             }
             return res.data;
         } catch(err) {
@@ -24,7 +25,11 @@ const AuthContextProvider = ({ children }) => {
         }
     }
 
-    const AuthContextData = {loginUser};
+    const loadUser = () => {
+        dispatch( { type: "LOGIN", user_id: localStorage.getItem('accessToken') } )
+    }
+
+    const AuthContextData = {loginUser, loadUser};
 
     return (
         <AuthContext.Provider value={AuthContextData}>

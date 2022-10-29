@@ -45,9 +45,10 @@ function MainContent( props ){
             user: user_id,
             conversation_id: conversationID,
             content: newMsg,
-            send_time: Date.now,
+            send_time: Date.now(),
             attached: false
         }]);
+        console.log(new Date(Date.now()).toUTCString());
         document.ChatForm.ChatContext.value = ""; 
     }
 
@@ -58,7 +59,7 @@ function MainContent( props ){
                 <hr/>
                 <MessageContainer msglist={msgList}/>
                 <hr/>
-            <ChatForm addMsg={addMsg}/>
+                <ChatForm addMsg={addMsg}/>
             </div>
                 :
             <div className="main-content">Chọn một cuộc trò chuyện để bắt đầu</div>

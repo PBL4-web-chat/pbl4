@@ -3,9 +3,12 @@ import SideBar from "../components/SideBar";
 import MainContent from "../components/MainContent";
 import React from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
+import { API_URL } from "../utils/constants";
 
 function MainPage(){
 
@@ -13,6 +16,8 @@ function MainPage(){
   const [msgList, setmsgList] = useState([]);
   const [conversation_id, setConversationID] = useState("");
   const [apiResponse, setapiResponse] = useState('');
+
+  const { loadUser } = useContext(AuthContext);
 
   const nav = useNavigate();
 
@@ -22,12 +27,15 @@ function MainPage(){
   }
 
   useEffect(() => {
-    if(localStorage["accessToken"]) setuser_id(localStorage.getItem('accessToken'));
+    if(localStorage["accessToken"]) {
+      setuser_id(localStorage.getItem('accessToken'));
+      loadUser();
+    }
     else {
       nav('/');
     };
     if(conversation_id !== "") 
-      fetch("http://localhost:8080/api/msg/getmsg/" + conversation_id)
+      fetch(API_URL + "/api/msg/getmsg/" + conversation_id)
         .then(res => res.json())
         .then(data => {
           //console.log(data);
@@ -46,7 +54,10 @@ function MainPage(){
           setapiResponse('responsed');
           setmsgList(list);
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          nav('/');
+        });
   }, [])
 
   return (
@@ -54,7 +65,7 @@ function MainPage(){
       <NavBar />
       <SideBar changeConvID={ChangeConvID}/>
       <MainContent list={msgList} user_id={user_id} conversation_id={conversation_id}/>
-      <p style={{ position: "absolute", display: "none" }}>{apiResponse}</p>
+      <Outlet />
     </>
   );
 }

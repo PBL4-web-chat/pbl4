@@ -1,4 +1,5 @@
 const express = require('express');
+const { ObjectId } = require('mongodb');
 const router = express.Router();
 
 const Conversation = require('../models/Conversation');
@@ -35,8 +36,8 @@ router.get('/:user_id', async(req, res) => {
     }
 })
 
-router.get('/conv/:conversation_id', async(req, res) => {
-    const conversation_id = req.params;
+router.get('/get/:conversation_id', async(req, res) => {
+    const { conversation_id } = req.params;
 
     if(!conversation_id)
         return res
@@ -44,7 +45,7 @@ router.get('/conv/:conversation_id', async(req, res) => {
             .json({ success: false, message: "missing conversation id" });
 
     try {
-        const conversation = await Conversation.findOne({ _id: conversation_id });
+        const conversation = await Conversation.findById(ObjectId(conversation_id));
 
         if(!conversation)
             return res
@@ -72,7 +73,7 @@ router.post('/add', async(req, res) => {
 
         await conversation.save();
 
-        res.status(200).json({ success: true, message: "conversation added" });
+        res.status(200).json({ success: true, message: "conversation added", data: {id: conversation.id} });
     } catch(err) {
         res.status(500).json({ success: false, message: "unexpected error", data: err })
     }

@@ -42,8 +42,8 @@
     color: white;
 }
 
-.side-bar-li:hover{
-    opacity: 80%;
+.side-bar-li:hover, .selected{
+    opacity: 95%;
     background-color: #5a5c66;
     cursor: pointer;
 }

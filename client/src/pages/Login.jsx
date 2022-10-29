@@ -4,14 +4,21 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useEffect } from "react";
+import { authReducer } from "../reducer/authReducer";
+import { useReducer } from "react";
 
 function Login() {
 
+    const [auth, dispatch] = useReducer(authReducer, {})
+    const { loginUser, loadUser } = useContext(AuthContext);
+
     useEffect(() => {
-        if(localStorage['accessToken']) nav('/mainpage');
+        if(localStorage['accessToken']) {
+            loadUser();
+            nav('/mainpage');
+        };
     }, [])
 
-    const { loginUser } = useContext(AuthContext);
     const [ loginStatus, setLoginStatus ] = useState( { 
         display: false,
         message: ""

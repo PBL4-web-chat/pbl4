@@ -17,6 +17,10 @@ const msgSchema = new Schema({
     attached: {
         type: Boolean,
         default: false,
+    },
+    send_time: {
+        type: Date,
+        default: Date.now,
     }
 })
 

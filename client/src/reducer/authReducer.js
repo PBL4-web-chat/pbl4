@@ -1,7 +1,21 @@
 const authReducer = (state, action) => {
-    switch(action) {
+    switch(action.type) {
         case "LOGIN":
-            return {...state }
+            return {...state,
+                authLoading: false,
+                authenticated: true,
+                user: action.user_id
+            }
+        
+        case "LOAD":
+            return {...state,
+                authLoading: false,
+                authenticated: true,
+                user: action.user_id
+            }
+
+        default:
+            return state
     }
 }
 

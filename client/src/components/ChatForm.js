@@ -13,7 +13,6 @@ function ChatForm( { addMsg } ){
             <div className="context-right">
                 <button type="button" id="btn-send" name="btnSend" onClick={addMsg}><i className="fa fa-send"></i></button>
             </div>
-            {console.log("chatform rendered")}
         </form>
     )
 }
